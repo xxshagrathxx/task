@@ -1,0 +1,43 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // $user->dark = 1;
+        // $user->avatar = 'avatar.png';
+        $user = User::create([
+            'name' => 'Super Admin',
+            // $user->username = 'Admin',
+            'password' => \Hash::make('admin'),
+            'email' => 'admin@admin.com',
+            'email_verified_at' => now(),
+            'role_id' => 1, // As this is the super admin
+            'avatar' => 'default.png',
+            'remember_token' => Str::random(10),
+        ]);
+
+        $user->assignRole('Super Admin');
+
+        // $user = User::where('email','superadmin@dvdyatii.com')->first();
+
+        // if(Role::where('name','Admin')->get()->count() == 0){
+        //     Role::create(['name' => 'Admin']);
+        //     $user->assignRole('Admin');
+        // }else{
+        //     $user->assignRole('Admin');
+        // }
+    }
+}
